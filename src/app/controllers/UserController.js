@@ -11,7 +11,7 @@ class UserController {
       password: Yup.string()
         .required()
         .min(6),
-      perfil: Yup.string().required(),
+      perfil: Yup.string(),
       // townhouse: Yup.array(),
     });
 
