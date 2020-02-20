@@ -7,6 +7,8 @@ import SessionController from './app/controllers/SessionController';
 
 import authMiddleware from './app/middlewares/auth';
 
+import ServiceContoller from './app/controllers/ServiceController';
+
 const routes = new Router();
 
 routes.post('/users', UserContoller.store);
@@ -18,5 +20,7 @@ routes.post('/clients', ClientController.store);
 routes.put('/clients', ClientController.update);
 
 routes.put('/users', UserContoller.update);
+
+routes.post('/services', ServiceContoller.store);
 
 export default routes;
