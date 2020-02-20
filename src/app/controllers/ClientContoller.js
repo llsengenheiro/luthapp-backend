@@ -3,6 +3,9 @@ import Client from '../models/Client';
 
 class ClientController {
   async store(req, res) {
+    if (!(req.userPerfil === 'admin')) {
+      return res.status(401).json({ error: 'Perfil não autorizado' });
+    }
     const schema = Yup.object().shape({
       name: Yup.string().required(),
       address: Yup.string().required(),
@@ -10,9 +13,6 @@ class ClientController {
       contract: Yup.boolean().required(),
     });
 
-    if (!(req.userPerfil === 'admin')) {
-      return res.status(401).json({ error: 'Perfil não autorizado' });
-    }
     if (!(await schema.isValid(req.body))) {
       return res.status(401).json({ error: 'Falha na validação' });
     }

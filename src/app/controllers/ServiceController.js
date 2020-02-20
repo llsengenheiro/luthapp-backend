@@ -17,9 +17,6 @@ class ServiceController {
     }
 
     const { client_id, type, defect, status } = req.body;
-    // const { id, name, address, contract, cellphone } = await Service.create(
-    // req.body
-    // );
 
     const service = await Service.create({
       user_id: req.userId,
