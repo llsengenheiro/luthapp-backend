@@ -13,6 +13,13 @@ class Client extends Model {
         sequelize,
       }
     );
+    Client.associate = models => {
+      Client.belongsToMany(models.User, {
+        through: 'users_clients',
+        as: 'user',
+        foreignKey: 'client_id',
+      });
+    };
     return this;
   }
 }

@@ -16,6 +16,18 @@ class User extends Model {
         sequelize,
       }
     );
+    User.associate = models => {
+      User.belongsToMany(models.Client, {
+        through: 'users_clients',
+        as: 'client',
+        foreignKey: 'user_id',
+      });
+      this.hasOne(models.Order, {
+        foreignKey: 'technical_id',
+        as: 'technical',
+      });
+    };
+
     this.addHook('beforeSave', async user => {
       if (user.password) {
         user.password_hash = await bcrypt.hash(user.password, 8);

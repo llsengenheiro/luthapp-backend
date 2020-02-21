@@ -1,4 +1,5 @@
 import * as Yup from 'yup';
+import { Op } from 'sequelize';
 import Client from '../models/Client';
 
 class ClientController {
@@ -72,7 +73,21 @@ class ClientController {
   }
 
   async index(req, res) {
-    return res.json({ msg: 'List Client' });
+    if (!(req.userPerfil === 'admin')) {
+      return res.status(401).json({ error: 'Perfil não autorizado' });
+    }
+    const { client } = req.query;
+
+    const search = `%${client}%`;
+
+    const clients = await Client.findAll({
+      where: {
+        name: {
+          [Op.iLike]: search,
+        },
+      },
+    });
+    return res.json(clients);
   }
 }
 
