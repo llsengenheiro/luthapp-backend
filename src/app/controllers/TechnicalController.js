@@ -1,5 +1,5 @@
 import User from '../models/User';
-import Order from '../models/Order';
+// import Order from '../models/Order';
 
 class TechnicalController {
   // index -- list technical
@@ -11,12 +11,7 @@ class TechnicalController {
 
     const technicals = await User.findAll({
       where: { perfil: 'tech' },
-      attributes: ['id', 'name', 'perfil'],
-      include: {
-        model: Order,
-        as: 'technical',
-        attributes: ['description_defect'],
-      },
+      attributes: ['id', 'name', 'email'],
     });
 
     return res.json(technicals);

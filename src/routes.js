@@ -15,6 +15,10 @@ import ServicePedingController from './app/controllers/ServicePedingController';
 
 import TechnicalController from './app/controllers/TechnicalController';
 
+import TechnicalOrdersController from './app/controllers/TechnicalOrdersController';
+
+import OderOpenController from './app/controllers/OrderOpenController';
+
 const routes = new Router();
 
 routes.post('/users', UserContoller.store);
@@ -32,9 +36,14 @@ routes.get('/users', UserContoller.index);
 routes.post('/services', ServiceContoller.store);
 
 routes.post('/orders', OrderController.store);
+routes.get('/orders', OrderController.index);
 
 routes.get('/services/peding', ServicePedingController.index);
 
 routes.get('/technical', TechnicalController.index);
+
+routes.get('/technicalorders', TechnicalOrdersController.index);
+
+routes.get('/orderopen', OderOpenController.index);
 
 export default routes;

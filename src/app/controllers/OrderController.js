@@ -1,4 +1,5 @@
 import * as Yup from 'yup';
+
 import Order from '../models/Order';
 
 class ServiceController {
@@ -15,8 +16,6 @@ class ServiceController {
         .integer()
         .required(),
       description_defect: Yup.string().required(),
-      service_done: Yup.string().required(),
-      backlog: Yup.string(),
       status: Yup.string(),
     });
 
@@ -24,26 +23,28 @@ class ServiceController {
       return res.status(401).json({ error: 'Falha na validação' });
     }
 
-    const {
-      technical_id,
-      service_id,
-      description_defect,
-      service_done,
-      backlog,
-      status,
-    } = req.body;
+    const { technical_id, service_id, description_defect, status } = req.body;
 
     const order = await Order.create({
       user_id: req.userId,
       technical_id,
       service_id,
       description_defect,
-      service_done,
-      backlog,
+
       status,
     });
 
     return res.json(order);
+  }
+
+  async index(req, res) {
+    if (!(req.userPerfil === 'admin')) {
+      return res.status(401).json({ error: 'Perfil não autorizado' });
+    }
+
+    const servicePeding = await Order.findAll();
+
+    return res.json(servicePeding);
   }
 }
 export default new ServiceController();

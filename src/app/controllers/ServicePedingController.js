@@ -1,6 +1,7 @@
 import { Op } from 'sequelize';
 import Service from '../models/Service';
 import Client from '../models/Client';
+import User from '../models/User';
 
 class ServicePedingController {
   async index(req, res) {
@@ -14,11 +15,17 @@ class ServicePedingController {
           [Op.or]: ['aberta'],
         },
       },
+      attributes: ['id', 'type', 'defect'],
       include: [
         {
           model: Client,
           as: 'client',
           attributes: ['id', 'name', 'address', 'cellphone'],
+        },
+        {
+          model: User,
+          as: 'user',
+          attributes: ['id', 'name'],
         },
       ],
     });
