@@ -15,8 +15,6 @@ import ServicePedingController from './app/controllers/ServicePedingController';
 
 import TechnicalController from './app/controllers/TechnicalController';
 
-import TechnicalOrdersController from './app/controllers/TechnicalOrdersController';
-
 import OderOpenController from './app/controllers/OrderOpenController';
 
 const routes = new Router();
@@ -41,8 +39,6 @@ routes.get('/orders', OrderController.index);
 routes.get('/services/peding', ServicePedingController.index);
 
 routes.get('/technical', TechnicalController.index);
-
-routes.get('/technicalorders', TechnicalOrdersController.index);
 
 routes.get('/orderopen', OderOpenController.index);
 
