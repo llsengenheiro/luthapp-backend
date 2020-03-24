@@ -12,7 +12,7 @@ class ServicePedingController {
     const servicePeding = await Service.findAll({
       where: {
         status: {
-          [Op.or]: ['aberta'],
+          [Op.or]: ['open'],
         },
       },
       attributes: ['id', 'type', 'defect'],

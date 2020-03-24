@@ -16,14 +16,14 @@ class ServiceController {
       return res.status(401).json({ error: 'Falha na validação' });
     }
 
-    const { client_id, type, defect, status } = req.body;
+    const { client_id, type, defect } = req.body;
 
     const service = await Service.create({
       user_id: req.userId,
       client_id,
       type,
       defect,
-      status,
+      status: 'open',
     });
 
     return res.json(service);

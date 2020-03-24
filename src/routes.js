@@ -10,12 +10,12 @@ import authMiddleware from './app/middlewares/auth';
 import ServiceContoller from './app/controllers/ServiceController';
 
 import OrderController from './app/controllers/OrderController';
+import OderOpenController from './app/controllers/OrderOpenController';
+import OrderTechnicalAcceptController from './app/controllers/OrderTechnicalAcceptController';
 
 import ServicePedingController from './app/controllers/ServicePedingController';
 
 import TechnicalController from './app/controllers/TechnicalController';
-
-import OderOpenController from './app/controllers/OrderOpenController';
 
 const routes = new Router();
 
@@ -35,11 +35,14 @@ routes.post('/services', ServiceContoller.store);
 
 routes.post('/orders', OrderController.store);
 routes.get('/orders', OrderController.index);
+routes.put('/orders', OrderController.update);
 
 routes.get('/services/peding', ServicePedingController.index);
 
 routes.get('/technical', TechnicalController.index);
 
 routes.get('/orderopen', OderOpenController.index);
+
+routes.put('/order/technical/accept', OrderTechnicalAcceptController.update);
 
 export default routes;

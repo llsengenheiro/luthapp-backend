@@ -16,7 +16,7 @@ class OrderOpenController {
       orders = await Order.findAll({
         where: {
           status: {
-            [Op.or]: ['aberta', 'programada'],
+            [Op.or]: ['create', 'programada'],
           },
         },
         attributes: ['id', 'description_defect'],
@@ -47,7 +47,7 @@ class OrderOpenController {
           [Op.and]: [
             {
               status: {
-                [Op.or]: ['aberta', 'programada'],
+                [Op.or]: ['create', 'programada'],
               },
             },
             {
