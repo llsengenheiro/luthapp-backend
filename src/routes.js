@@ -10,8 +10,12 @@ import authMiddleware from './app/middlewares/auth';
 import ServiceContoller from './app/controllers/ServiceController';
 
 import OrderController from './app/controllers/OrderController';
+
 import OderOpenController from './app/controllers/OrderOpenController';
+
 import OrderTechnicalAcceptController from './app/controllers/OrderTechnicalAcceptController';
+
+import OrderTechnicalCancelController from './app/controllers/OrderTechnicalCancelController';
 
 import ServicePedingController from './app/controllers/ServicePedingController';
 
@@ -44,5 +48,7 @@ routes.get('/technical', TechnicalController.index);
 routes.get('/orderopen', OderOpenController.index);
 
 routes.put('/order/technical/accept', OrderTechnicalAcceptController.update);
+
+routes.put('/order/technical/cancel', OrderTechnicalCancelController.update);
 
 export default routes;
