@@ -35,9 +35,7 @@ class OrderTechnicalAccpetController {
       return res.status(401).json({ error: 'Ordem de serviço não existe' });
     }
 
-    console.log(req.userId, technical_id);
-
-    if (req.userId.toString() !== technical_id) {
+    if (req.userId !== technical_id) {
       return res.status(401).json({ error: 'Está ordem não pertence a você' });
     }
 
