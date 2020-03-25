@@ -24,7 +24,7 @@ class OrderOpenController {
           {
             model: Service,
             as: 'service',
-            attributes: ['id', 'type', 'status'],
+            attributes: ['id', 'type', 'defect', 'status'],
             include: [
               {
                 model: Client,
@@ -60,7 +60,7 @@ class OrderOpenController {
           {
             model: Service,
             as: 'service',
-            attributes: ['id', 'type', 'status'],
+            attributes: ['id', 'type', 'defect', 'status'],
             include: [
               {
                 model: Client,
