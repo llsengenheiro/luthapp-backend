@@ -15,8 +15,6 @@ import OderOpenController from './app/controllers/OrderOpenController';
 
 import OrderTechnicalAcceptController from './app/controllers/OrderTechnicalAcceptController';
 
-import OrderTechnicalCancelController from './app/controllers/OrderTechnicalCancelController';
-
 import ServicePedingController from './app/controllers/ServicePedingController';
 
 import TechnicalController from './app/controllers/TechnicalController';
@@ -40,6 +38,7 @@ routes.post('/services', ServiceContoller.store);
 routes.post('/orders', OrderController.store);
 routes.get('/orders', OrderController.index);
 routes.put('/orders', OrderController.update);
+routes.delete('/orders', OrderController.delete);
 
 routes.get('/services/peding', ServicePedingController.index);
 
@@ -48,7 +47,5 @@ routes.get('/technical', TechnicalController.index);
 routes.get('/orderopen', OderOpenController.index);
 
 routes.put('/order/technical/accept', OrderTechnicalAcceptController.update);
-
-routes.put('/order/technical/cancel', OrderTechnicalCancelController.update);
 
 export default routes;

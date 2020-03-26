@@ -81,11 +81,19 @@ class OrderController {
     if (!order) {
       return res.status(400).json({ error: 'Ordem de serviço não existe' });
     }
+
+    if (!order.aceppt_at) {
+      return res
+        .status(400)
+        .json({ error: 'Nenhum técnico aceitou está ordem de serviço' });
+    }
     if (req.userId !== order.technical_id) {
       return res.status(401).json({ error: 'Está ordem não pertence a você' });
     }
-    // cath date and hour of the moment
-    const fineshed_at = '2020-03-25T20:30';
+    /**    const fineshed_at = new Date().toLocaleString('pt-BR', {
+      timeZone: 'America/Sao_Paulo',
+    }); */
+    const fineshed_at = new Date();
 
     await order.update({
       fineshed_at,
@@ -105,6 +113,41 @@ class OrderController {
       fineshed_at,
       service_done,
       backlog,
+    });
+  }
+
+  async delete(req, res) {
+    const schema = Yup.object().shape({
+      id: Yup.number()
+        .integer()
+        .required(),
+    });
+    const { id } = req.query;
+    console.log(`Teste: ${id}`);
+
+    if (!(await schema.isValid(req.query))) {
+      return res.status(401).json({ error: 'Falha na validação' });
+    }
+
+    if (req.userPerfil === 'client') {
+      return res.status(401).json({ error: 'Perfil não autorizado' });
+    }
+
+    const statusNew = 'open';
+    const orderExist = await Order.findByPk(id);
+
+    if (!orderExist) {
+      return res.status(401).json({ error: 'Ordem de serviço não existe' });
+    }
+
+    await Order.destroy({ where: { id } });
+    await Service.update(
+      { status: statusNew },
+      { where: { id: orderExist.service_id } }
+    );
+
+    return res.json({
+      status: statusNew,
     });
   }
 }
