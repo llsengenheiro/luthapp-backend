@@ -1,7 +1,9 @@
 import * as Yup from 'yup';
 
+// import OneSignal from 'onesignal-node';
 import Order from '../models/Order';
 import Service from '../models/Service';
+import OneSignal from '../../config/onesignal';
 
 class OrderController {
   async store(req, res) {
@@ -44,6 +46,16 @@ class OrderController {
     if (order) {
       await Service.update({ status: 'create' }, { where: { id: service_id } });
     }
+
+    const message = {
+      app_id: 'f5b5d57c-f68c-4802-9e35-b04559addd16',
+      contents: { en: 'English Message' },
+      included_segments: ['All'],
+    };
+    //    const newDevice = client.addDevice();
+    //  console.log(JSON.stringify(newDevice));
+
+    OneSignal.sendNotification(message);
     return res.json(order);
   }
 

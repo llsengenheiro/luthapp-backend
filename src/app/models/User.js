@@ -11,6 +11,7 @@ class User extends Model {
         password_hash: Sequelize.STRING,
         perfil: Sequelize.STRING,
         townhouse: Sequelize.STRING,
+        onesignal_id: Sequelize.STRING,
       },
       {
         sequelize,
