@@ -14,6 +14,7 @@ class UserController {
           .required()
           .min(6),
         perfil: Yup.string(),
+        onesignal_id: Yup.string(),
         // townhouse: Yup.array(),
       });
 
@@ -29,6 +30,7 @@ class UserController {
       }
 
       const { clients, ...data } = req.body;
+      console.log(req.body);
       const user = await User.create(data);
 
       if (data.perfil === 'client') {
@@ -53,6 +55,7 @@ class UserController {
       name: Yup.string(),
       email: Yup.string().email(),
       oldPassword: Yup.string().min(6),
+      onesignal_id: Yup.string(),
       perfil: Yup.string(),
       // townhouse: Yup.array()), Validação do array
       password: Yup.string()
