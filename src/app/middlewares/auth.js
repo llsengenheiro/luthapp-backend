@@ -16,10 +16,11 @@ export default async (req, res, next) => {
     const decoded = await promisify(jwt.verify)(token, authConfig.secret);
 
     const { data } = decoded;
-    const [id, perfil] = data;
+    const [id, perfil, onesignal_id] = data;
 
     req.userId = id;
     req.userPerfil = perfil;
+    req.userOnesignal = onesignal_id;
 
     return next();
   } catch (error) {

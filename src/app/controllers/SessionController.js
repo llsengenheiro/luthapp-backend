@@ -28,7 +28,7 @@ class SessionController {
       return res.status(401).json({ error: 'Senha não confere!!!' });
     }
 
-    const { id, name, perfil, townhouse } = user;
+    const { id, name, perfil, townhouse, onesignal_id } = user;
 
     return res.json({
       user: {
@@ -36,8 +36,9 @@ class SessionController {
         name,
         perfil,
         townhouse,
+        onesignal_id,
       },
-      token: jwt.sign({ data: [id, perfil] }, authConfig.secret, {
+      token: jwt.sign({ data: [id, perfil, onesignal_id] }, authConfig.secret, {
         expiresIn: authConfig.experesIn,
       }), // lutheficienciatecnologica
     });

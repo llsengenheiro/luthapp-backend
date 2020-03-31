@@ -50,10 +50,9 @@ class OrderController {
     const message = {
       app_id: 'f5b5d57c-f68c-4802-9e35-b04559addd16',
       contents: { en: 'English Message' },
-      included_segments: ['All'],
+      // include_player_ids: [req.userOnesignal],
+      include_external_user_ids: [technical_id],
     };
-    //    const newDevice = client.addDevice();
-    //  console.log(JSON.stringify(newDevice));
 
     OneSignal.sendNotification(message);
     return res.json(order);

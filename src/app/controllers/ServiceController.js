@@ -1,5 +1,6 @@
 import * as Yup from 'yup';
 import Service from '../models/Service';
+import OneSignal from '../../config/onesignal';
 
 class ServiceController {
   async store(req, res) {
@@ -25,6 +26,14 @@ class ServiceController {
       defect,
       status: 'open',
     });
+
+    const message = {
+      app_id: 'f5b5d57c-f68c-4802-9e35-b04559addd16',
+      contents: { en: 'English Message' },
+      included_segments: ['All'],
+    };
+
+    OneSignal.sendNotification(message);
 
     return res.json(service);
   }
