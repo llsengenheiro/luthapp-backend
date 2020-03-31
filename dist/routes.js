@@ -21,6 +21,10 @@ var _TechnicalController = require('./app/controllers/TechnicalController'); var
 
 const routes = new (0, _express.Router)();
 
+routes.get('/', (req, res) => {
+  res.json('Teste');
+});
+
 routes.post('/users', _UserController2.default.store);
 routes.post('/sessions', _SessionController2.default.store);
 
