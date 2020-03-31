@@ -21,6 +21,10 @@ import TechnicalController from './app/controllers/TechnicalController';
 
 const routes = new Router();
 
+routes.get('/', (req, res) => {
+  res.json('Teste');
+});
+
 routes.post('/users', UserContoller.store);
 routes.post('/sessions', SessionController.store);
 
