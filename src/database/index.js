@@ -15,7 +15,20 @@ class Database {
   }
 
   init() {
-    this.connection = new Sequelize(process.env.DATABASE_URL);
+    if (process.env.DATABASE_URL) {
+      console.log('teste');
+      // the application is executed on Heroku ... use the postgres database
+      this.connection = new Sequelize(process.env.DATABASE_URL, {
+        dialect: 'postgres',
+        protocol: 'postgres',
+        // port: match[4],
+        // host: match[3],
+        logging: true, // false
+      });
+    } else {
+      // the application is executed on the local machine ... use mysql
+      this.connection = new Sequelize(databaseConfig);
+    }
 
     models
       .map(model => model.init(this.connection))

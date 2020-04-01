@@ -1,14 +1,20 @@
-require('dotenv');
+require('dotenv/config');
 
-module.exports = {
-  dialect: 'postgres',
-  host: process.env.DB_HOST,
-  username: process.env.DB_USER,
-  password: process.env.DB_PASS,
-  database: process.env.DB_NAME,
-  define: {
-    timestamps: true,
-    underscored: true,
-    underscoredAll: true,
-  },
-};
+if (process.env.NODE_ENV === 'development') {
+  module.exports = {
+    dialect: 'postgres',
+    host: process.env.DB_HOST,
+    username: process.env.DB_USER,
+    password: process.env.DB_PASS,
+    database: process.env.DB_NAME,
+    define: {
+      timestamps: true,
+      underscored: true,
+      underscoredAll: true,
+    },
+  };
+} else {
+  module.exports = {
+    stringConecction: process.env.DATABASE_URL,
+  };
+}
