@@ -15,6 +15,14 @@ if (process.env.NODE_ENV === 'development') {
   };
 } else {
   module.exports = {
-    stringConecction: process.env.DATABASE_URL,
+    stringConecction:
+      (process.env.DATABASE_URL,
+      {
+        dialect: 'postgres',
+        protocol: 'postgres',
+        port: 5432,
+        host: 'ec2-52-6-143-153.compute-1.amazonaws.com',
+        logging: true, // false
+      }),
   };
 }
