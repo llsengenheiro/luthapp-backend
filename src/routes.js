@@ -22,7 +22,7 @@ import TechnicalController from './app/controllers/TechnicalController';
 const routes = new Router();
 
 routes.get('/', (req, res) => {
-  res.json('Teste');
+  res.json('Teste sem build antees');
 });
 
 routes.post('/users', UserContoller.store);
